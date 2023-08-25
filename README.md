@@ -63,8 +63,12 @@ Hence add pandas in requirements.txt and separately in terminal@MLOps level:
 
 then add content of get_data.py to get data from s3
 then add content of load_data.py to load and save data to data/raw folder
+
+[OPTIONAL]
 then add stage in dvc.yaml for above
 -> dvc repro
+-> dvc add remote
+-> dvc push
 
 
 
