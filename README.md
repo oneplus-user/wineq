@@ -10,9 +10,7 @@ activate env
 conda activate wineq
 ```
 
-created a req file
-
-install the req
+create a req file and install the req
 ```bash
 pip install -r requirements.txt
 ```
@@ -54,7 +52,7 @@ git push origin main #push all the changes commited in local
 Next 
 1. we generate params.yaml files.
 2. we create file inside src named:get_data.py --> touch src/get_data.py
-# Note:
+Note:
 we tried to import pandas but currently pandas is not there. How we know this?
 In terminal@MLOps level:(for any python commands, first type python) like below and exit
 -> python
@@ -63,7 +61,11 @@ In terminal@MLOps level:(for any python commands, first type python) like below 
 Hence add pandas in requirements.txt and separately in terminal@MLOps level:
 -> pip install pandas
 
-then add content of get_data.py
+then add content of get_data.py to get data from s3
+then add content of load_data.py to load and save data to data/raw folder
+then add stage in dvc.yaml for above
+-> dvc repro
+
 
 
 

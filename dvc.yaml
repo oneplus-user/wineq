@@ -1,9 +1,17 @@
+# stages:
+#   load_data:
+#     cmd: python src/load_data.py --config=params.yaml
+#     deps:
+#     - src/get_data.py #from s3_source(here it is in data_given/winequality.csv)
+#     - src/load_data.py #to load_and_save data from src/get_data.py to data/raw folder
+#     outs:
+#     - data/raw/winequality.csv
+
 stages:
   load_data:
     cmd: python src/load_data.py --config=params.yaml
     deps:
-    - src/get_data.py
+    - src/get_data.py 
     - src/load_data.py
-    - data_given/winequality.csv
     outs:
     - data/raw/winequality.csv
