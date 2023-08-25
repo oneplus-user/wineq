@@ -87,6 +87,10 @@ then add content of train_and_evaluate.py
 -> python src/train_and_evaluate.py
 to take data from data/processed folder and fit model and print evaluation metrics and {save models to saved_models folder, score&model_parameters to reports}
 
+[OPTIONAL] as git tracks it as well
+8. then add stage in dvc.yaml for above
+-> dvc repro     # to generate dvc.lock
+
 
 
 
