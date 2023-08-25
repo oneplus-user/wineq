@@ -17,8 +17,8 @@ install the req
 pip install -r requirements.txt
 ```
 
-create template.py to generate folder(with .gitkeep) & files structures
-then run it with -- python template.py
+create template.py to generate folder(with .gitkeep) & files structures. Then run it with:
+-> python template.py
 
 download the data from 
 https://drive.google.com/drive/folders/18zqQiCJVgF7uzXgfbIJ-04zgz1ItNfF5?usp=sharing
@@ -43,14 +43,40 @@ git branch -M main #in local, to change current branch name from master to main[
 git pull # to pull all the files in remote(NOTE: It will not alter changes made in local)
 ```
 ```bash
-git add .     #in local, and . means to add all files for versioning purpose
-```
-```bash
-git commit -m "first commit" #in local, and commit to changes(Its like saying its final)
+git add . && git commit -m "first commit"
+#in local, add . means to add all files for versioning purpose
+#in local, and commit to changes(Its like saying its final)
 ```
 ```bash
 git push origin main #push all the changes commited in local
 ```
+
+Next 
+1. we generate params.yaml files.
+2. we create file inside src named:get_data.py --> touch src/get_data.py
+# Note:
+we tried to import pandas but currently pandas is not there. How we know this?
+In terminal@MLOps level:(for any python commands, first type python) like below and exit
+-> python
+-> import pandas (will give error, so exit)
+-> exit()
+Hence add pandas in requirements.txt and separately in terminal@MLOps level:
+-> pip install pandas
+
+then add content of get_data.py
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 tox command -
 ```bash
