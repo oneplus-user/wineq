@@ -69,17 +69,23 @@ then add content of load_data.py
 -> python src/load_data.py
 to recieve dataframe from get_data.py, process, and save to data/raw folder
 
-[OPTIONAL]
+[OPTIONAL] as git tracks it as well
 4. then add stage in dvc.yaml for above
--> dvc repro # to generate dvc.lock
+-> dvc repro     # to generate dvc.lock
 
 5. we create file inside src named:split_data.py --> touch src/split_data.py
 then add content of split_data.py 
 -> python src/split_data.py
 to take data from data/raw folder and split in train/test and save to data/processed folder
 
-6. 
+[OPTIONAL] as git tracks it as well
+6. then add stage in dvc.yaml for above
+-> dvc repro     # to generate dvc.lock
 
+7. we create file inside src named:train_and_evaluate.py --> touch src/train_and_evaluate.py 
+then add content of train_and_evaluate.py 
+-> python src/train_and_evaluate.py
+to take data from data/processed folder and fit model and print evaluation metrics and {save models to saved_models folder, score&model_parameters to reports}
 
 
 
