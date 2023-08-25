@@ -1,7 +1,8 @@
 create env 
 
 ```bash
-conda create -n wineq python=3.7 -y
+conda create -n wineq python=3.11.4 -y
+python --version # to see the verison installed
 ```
 
 activate env
@@ -15,9 +16,13 @@ install the req
 ```bash
 pip install -r requirements.txt
 ```
-download the data from 
 
+create template.py to generate folder(with .gitkeep) & files structures
+then run it with -- python template.py
+
+download the data from 
 https://drive.google.com/drive/folders/18zqQiCJVgF7uzXgfbIJ-04zgz1ItNfF5?usp=sharing
+to data_given folder
 
 ```bash
 git init
@@ -28,22 +33,23 @@ dvc init
 ```bash
 dvc add data_given/winequality.csv
 ```
-```bash
-git add .
-```
-```bash
-git commit -m "first commit"
-```
-
-oneliner updates  for readme
 
 ```bash
-git add . && git commit -m "update Readme.md"
+git remote add origin https://github.com/c17hawke/simple-dvc-demo.git #add remote repo given(name): origin and URL to specify remote [ONE TIME]
+git branch -M main #in local, to change current branch name from master to main[ONE TIME]
+```
+
+```bash
+git pull # to pull all the files in remote(NOTE: It will not alter changes made in local)
 ```
 ```bash
-git remote add origin https://github.com/c17hawke/simple-dvc-demo.git
-git branch -M main
-git push origin main
+git add .     #in local, and . means to add all files for versioning purpose
+```
+```bash
+git commit -m "first commit" #in local, and commit to changes(Its like saying its final)
+```
+```bash
+git push origin main #push all the changes commited in local
 ```
 
 tox command -
