@@ -16,7 +16,9 @@ pip install -r requirements.txt
 ```
 
 create template.py to generate folder(with .gitkeep) & files structures. Then run it with:
--> python template.py
+```bash
+python template.py
+```
 
 download the data from 
 https://drive.google.com/drive/folders/18zqQiCJVgF7uzXgfbIJ-04zgz1ItNfF5?usp=sharing
@@ -85,7 +87,7 @@ to take data from data/raw folder and split in train/test and save to data/proce
 7. we create file inside src named:train_and_evaluate.py --> touch src/train_and_evaluate.py 
 then add content of train_and_evaluate.py 
 -> python src/train_and_evaluate.py
-to take data from data/processed folder and fit model and print evaluation metrics and {save models to saved_models folder, score&model_parameters to reports}
+to take data from data/processed folder and fit model and print evaluation metrics and {save models to saved_models folder, score&model_parameters to report folder}
 
 [OPTIONAL] as git tracks it as well
 8. then add stage in dvc.yaml for above
