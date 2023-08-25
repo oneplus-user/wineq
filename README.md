@@ -52,23 +52,33 @@ git push origin main #push all the changes commited in local
 Next 
 1. we generate params.yaml files.
 2. we create file inside src named:get_data.py --> touch src/get_data.py
-Note:
-we tried to import pandas but currently pandas is not there. How we know this?
-In terminal@MLOps level:(for any python commands, first type python) like below and exit
--> python
--> import pandas (will give error, so exit)
--> exit()
-Hence add pandas in requirements.txt and separately in terminal@MLOps level:
--> pip install pandas
+    Note:
+    we tried to import pandas but currently pandas is not there. How we know this?
+    In terminal@MLOps level:(for any python commands, first type python) like below and exit
+        -> python
+        -> import pandas (will give error, so exit)
+        -> exit()
+        Hence add pandas in requirements.txt and separately in terminal@MLOps level:
+        -> pip install pandas
+then add content of get_data.py
+-> python src/get_data.py
+to load from remote(s3) and return dataframe
 
-then add content of get_data.py to get data from s3
-then add content of load_data.py to load and save data to data/raw folder
+3. we create file inside src named:load_data.py --> touch src/load_data.py
+then add content of load_data.py 
+-> python src/load_data.py
+to recieve dataframe from get_data.py, process, and save to data/raw folder
 
 [OPTIONAL]
-then add stage in dvc.yaml for above
--> dvc repro
--> dvc add remote
--> dvc push
+4. then add stage in dvc.yaml for above
+-> dvc repro # to generate dvc.lock
+
+5. we create file inside src named:split_data.py --> touch src/split_data.py
+then add content of split_data.py 
+-> python src/split_data.py
+to take data from data/raw folder and split in train/test and save to data/processed folder
+
+6. 
 
 
 
