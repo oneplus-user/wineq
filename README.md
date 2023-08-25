@@ -35,7 +35,7 @@ dvc add data_given/winequality.csv
 ```
 
 ```bash
-git remote add origin https://github.com/c17hawke/simple-dvc-demo.git #add remote repo given(name): origin and URL to specify remote [ONE TIME]
+git remote add origin https://github.com/oneplus-user/wineq.git #add remote repo given(name): origin and URL to specify remote [ONE TIME]
 git branch -M main #in local, to change current branch name from master to main[ONE TIME]
 ```
 
