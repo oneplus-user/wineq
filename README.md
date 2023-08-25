@@ -93,6 +93,11 @@ to take data from data/processed folder and fit model and print evaluation metri
 8. then add stage in dvc.yaml for above
 -> dvc repro     # to generate dvc.lock
 
+9. Main use of DVC
+Now make changes in params.yml, and run dvc repro: It will run from the part of code where it requires to start running. I don't have to re-run from start or think about it. Now:
+--> dvc metrics show
+--> dvc metrics diff (to see the change in scores and params)
+
 
 
 
