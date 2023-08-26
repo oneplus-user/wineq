@@ -1,5 +1,6 @@
-create env 
+USE control+c to kill terminal
 
+create env 
 ```bash
 conda create -n wineq python=3.11.4 -y 
 #this env is not for this folder, but for all the laptop & its folder structure
@@ -109,6 +110,10 @@ b. U can go to commits in git and if you want to go back:
     --> git checkout ......(number in front of each commit)
 ####
 
+
+9. (tox.ini + setup.py) run (pytest) to test assertions in (test_config.py)
+10. EDA for putting up tests above and custom error generation in (test_config.py)
+
 9. Add pytest and tox in requirements.txt. But, separately in terminal@MLOps level:
         -> pip install pytest
         -> pip install tox
@@ -165,6 +170,32 @@ b. U can go to commits in git and if you want to go back:
     to create dist folder where zip file of package will be there and can then be shared and installed using tools like pip -->
     *********************************************************************************************
 
+10. Now, we want to fill test_config.py as per my project data EDA. If we are making predictions, ranges of Xs can't be anything. It will be defined and if its beyond limits, we need to raise error. and this is what we want to achieve here.
+
+For EDA,
+in this working env, lets start jupyterlab:
+-> pip install jupyterlab
+-> jupyter-lab notebooks/
+Jupyter lab notebook will open at @MLops/notebooks/ level. generate schema_in.json to check limits and raise error if payload is beyond the limit.
+
+Also created NotInRange() custom error to raise error. Check in EDA.ipynb and test_config.py to raise error for test_generic2/3 in it.
+
+11. create following files and folders:
+-> mkdir -p prediction_service/model
+-> touch prediction_service/__init__.py
+-> touch prediction_service/prediction.py
+-> mkdir webapp
+-> mkdir -p webapp/static/css
+-> mkdir -p webapp/static/script
+-> mkdir -p webapp/templates
+-> touch webapp/static/css/main.css
+-> touch webapp/static/script/index.js
+-> touch webapp/templates/index.html
+-> touch webapp/templates/404.html
+-> touch webapp/templates/base.html
+-> touch app.py
+
+add content to: main.css, 404.html, base.html, index.html. Its very const stuff.
 
 
 
@@ -173,12 +204,3 @@ b. U can go to commits in git and if you want to go back:
 
 
 
-
-
-
-
-
-build your own package commands- 
-```bash
-python setup.py sdist bdist_wheel
-```

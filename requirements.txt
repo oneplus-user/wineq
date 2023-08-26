@@ -5,3 +5,4 @@ pandas
 # awswrangler
 pytest
 tox
+flake8
