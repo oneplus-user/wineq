@@ -1,8 +1,14 @@
 create env 
 
 ```bash
-conda create -n wineq python=3.11.4 -y
-python --version # to see the verison installed
+conda create -n wineq python=3.11.4 -y 
+#this env is not for this folder, but for all the laptop & its folder structure
+# if we create multiple env:
+# env1: laptop & its folder structure
+# env2: laptop & its folder structure........
+# Above created Python virtual env is a self-contained workspace that includes its own Python interpreter, libraries and site-package directory installed using pip install in this env
+
+python --version # to see the verison installed for this env
 ```
 
 activate env
@@ -103,6 +109,61 @@ b. U can go to commits in git and if you want to go back:
     --> git checkout ......(number in front of each commit)
 ####
 
+9. Add pytest and tox in requirements.txt. But, separately in terminal@MLOps level:
+        -> pip install pytest
+        -> pip install tox
+
+    create tox.ini file in root directory
+        -> touch tox.ini
+    then add content to tox.ini where we create test env and command to run in it using pytest and flake8 tool.
+
+    <!-- 
+    [Without TOX, only PYTEST]
+    Hence, Right now, we can run:
+    ->pytest -v in terminal but we will get that "No test run". -->
+
+    So, we make folder of tests and put test files to it:
+        -> mkdir test
+        -> touch tests/__init__.py tests/conftest.py tests/test_config.py
+        add content to tests/conftest.py, tests/test_config
+        In tests/test_config: we add our assertion which we want to test.
+    
+    <!-- 
+    ->pytest -v to run assertions mentioned in test_config.py but in existing env only -->
+
+    [With TOX, also use PYTEST]
+    -> tox
+    It will first create temporary env .tox : which is fresh env with latest requirements and run assertions mentioned in test_config.py
+    NOTE: with skipdist = False(default) in tox file, Tox will create a package like numpy for my code in temporary env before running assertions mentioned in test_config.py. This package in temporary env is built using setup.py.
+
+    so, let's create setup.py file.
+    -> touch setup.py and add content to it.
+
+    **********************************************************************************************
+    *********** All action of setup.py in my working env, not temp env created by tox ************
+    **********************************************************************************************
+    Lets look at the folder structure given below:
+    MLOps/
+    ├── src/
+    │   ├── __init__.py
+    │   ├── module1.py
+    │   ├── module2.py
+    ├── setup.py
+    ├── README.md
+    Here, above structure denotes how package_directory(where source codes and setup.py reside). Hence, pwd is same as package directory.
+
+    [DURING DEVELOPMENT]
+    -> pip install -e . & "package_name.egg-info" folder will be created.
+    [here we mention: "-e" for editable mode & "." as path for package directory==pwd] ; The package is installed to the Python environment with all the metadata taken from setup.py; over and above that, symlink is also created between the package directory and the Python environment's site-packages directory.
+    then u can see the package newly generated in site-packages directory using 
+    ->pip freeze
+    U can also import src in python from any pwd, even if package name is wine_src but source code folder name is src because it has been added in this env as package
+
+    <!-- [AFTER DEVELOPMENT]
+    You would typically run:
+    ->python setup.py sdist bdist_wheel
+    to create dist folder where zip file of package will be there and can then be shared and installed using tools like pip -->
+    *********************************************************************************************
 
 
 
@@ -116,24 +177,6 @@ b. U can go to commits in git and if you want to go back:
 
 
 
-
-tox command -
-```bash
-tox
-```
-for rebuilding -
-```bash
-tox -r 
-```
-pytest command
-```bash
-pytest -v
-```
-
-setup commands -
-```bash
-pip install -e . 
-```
 
 build your own package commands- 
 ```bash
