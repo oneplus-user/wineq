@@ -189,7 +189,7 @@ Also created NotInRange() custom error to raise error. Check in EDA.ipynb and te
 -> mkdir -p webapp/static/script
 -> mkdir -p webapp/templates
 -> touch webapp/static/css/main.css
--> touch webapp/static/script/index.js
+-> touch webapp/static/script/index.js #it is empty
 -> touch webapp/templates/index.html
 -> touch webapp/templates/404.html
 -> touch webapp/templates/base.html
