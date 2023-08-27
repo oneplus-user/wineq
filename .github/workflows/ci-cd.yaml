@@ -10,10 +10,13 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
     - uses: actions/checkout@v2
       with:
         ref: main  # Specify the branch explicitly
@@ -35,6 +38,7 @@ jobs:
     - name: Test with pytest
       run: |
         pytest -v
+
 
     # - name: Deploy to Heroku
     #   env:
