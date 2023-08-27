@@ -27,19 +27,19 @@ class NotInRange(Exception):
 #     "alcohol": 9
 #     },
 
-#     "correct_range":
-#     {"fixed_acidity": 5,
-#     "volatile_acidity": 1,
-#     "citric_acid": 0.5,
-#     "residual_sugar": 10,
-#     "chlorides": 0.5,
-#     "free_sulfur_dioxide": 3,
-#     "total_sulfur_dioxide": 75,
-#     "density": 1,
-#     "pH": 3,
-#     "sulphates": 1,
-#     "alcohol": 9
-#     },
+    # "correct_range":
+    # {"fixed_acidity": 5,
+    # "volatile_acidity": 1,
+    # "citric_acid": 0.5,
+    # "residual_sugar": 10,
+    # "chlorides": 0.5,
+    # "free_sulfur_dioxide": 3,
+    # "total_sulfur_dioxide": 75,
+    # "density": 1,
+    # "pH": 3,
+    # "sulphates": 1,
+    # "alcohol": 9
+    # },
 
 #     "incorrect_col":
 #     {"fixed acidity": 5,

@@ -195,7 +195,30 @@ Also created NotInRange() custom error to raise error. Check in EDA.ipynb and te
 -> touch webapp/templates/base.html
 -> touch app.py
 
-add content to: main.css, 404.html, base.html, index.html. Its very const stuff.
+add content to: main.css, 404.html, base.html, index.html. It's very const stuff.
+
+12. lets add content to app.py and transfer model to prediction_service
+-> cp saved_models/model.joblib prediction_service/model
+and set 
+-> webapp_model_dir: prediction_service/model/model.joblib in params.yaml
+
+Lets see first commented part of app.py(don't need prediction.py):
+    "Form format" and "JSON format" refer to two different ways of structuring data when sending information over HTTP request:
+    (a) "Form format": key1=value1&key2=value2&key3=value3 sent from Postman/browser-based application
+    (b) "JSON format": {"key1": "value1", "key2": "value2", "key3": "value3"} sent from Postman
+
+    We have read_params() for model path, predict() to generate response using model, with
+    any xyz function(at given path, here its root path) decorated by app. When request(<Request 'http://127.0.0.1:5000/' [POST/GET]>) comes to xyz function:
+        POST:
+        it checks whether it is 
+         (a) request.form(call form_response and render_template("index.html", response=response))
+         (b) request.json(call api_response and return json of response)
+         (c) otw, render_template("404.html", error=error)
+        GET:
+         (a) render_template("index.html") without response
+
+    Hence, you can just use just (POSTMAN and app.py) even if you don't have template.
+
 
 
 
