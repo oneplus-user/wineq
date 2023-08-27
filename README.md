@@ -202,7 +202,7 @@ add content to: main.css, 404.html, base.html, index.html. It's very const stuff
 and set 
 -> webapp_model_dir: prediction_service/model/model.joblib in params.yaml
 
-Lets see first commented part of app.py(don't need prediction.py):
+Lets see first commented part of app.py(don't need prediction.py which complement it):
     "Form format" and "JSON format" refer to two different ways of structuring data when sending information over HTTP request:
     (a) "Form format": key1=value1&key2=value2&key3=value3 sent from Postman/browser-based application
     (b) "JSON format": {"key1": "value1", "key2": "value2", "key3": "value3"} sent from Postman
@@ -219,6 +219,16 @@ Lets see first commented part of app.py(don't need prediction.py):
 
     Hence, you can just use just (POSTMAN and app.py) even if you don't have template.
 
+Later on, we will make use of app.py(uncomment ones)+prediction.py+POSTMAN(if you don't have template).
+
+13. lets create workflow using github:
+-> mkdir -p .github/workflows
+-> touch .github/workflows/ci-cd.yaml
+add content to it.
+ tox(only of python testing) ~ github actions(general version)
+
+Why Node.js?
+ When you're working on a project that involves both Python and JavaScript (for example, a web application with a backend written in Python and a frontend written in JavaScript), you might need to set up Node.js alongside Python. This ensures that you have the right tools available for both languages.
 
 
 

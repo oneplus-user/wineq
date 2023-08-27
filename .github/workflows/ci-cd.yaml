@@ -1,5 +1,7 @@
+# sets the name of the GitHub Actions workflow
 name: Python application
 
+# specifies the events that trigger the workflow
 on:
   push:
     branches:
@@ -13,14 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Set up Node.js
+    - name: Set up Node.js # setup node.js
       uses: actions/setup-node@v2
       with:
         node-version: '16'
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v2 # workflow uses latest code from the main branch(provides access to the repository's code)
       with:
-        ref: main  # Specify the branch explicitly
-    - name: Set up Python 3.11.4
+        ref: main  
+    - name: Set up Python 3.11.4 #to set up Python version 3.11.4
       uses: actions/setup-python@v2
       with:
         python-version: 3.11.4
@@ -38,8 +40,6 @@ jobs:
     - name: Test with pytest
       run: |
         pytest -v
-
-
     # - name: Deploy to Heroku
     #   env:
     #     HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
