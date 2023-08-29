@@ -51,9 +51,10 @@ jobs:
 
       - name: Deploy to Netlify
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }} # Use the name of your Netlify secret
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}  # Use the name of your Netlify secret
         if: github.ref == 'refs/heads/main' && job.status == 'success'
         run: |
           npm install -g netlify-cli  # Install the Netlify CLI
-          netlify login -t $NETLIFY_AUTH_TOKEN  # Log in to Netlify using the token
+          netlify login
           netlify deploy --prod  # Deploy the site
+
