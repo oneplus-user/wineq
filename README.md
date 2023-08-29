@@ -220,15 +220,25 @@ Lets see first commented part of app.py(don't need prediction.py which complemen
     Hence, you can just use just (POSTMAN and app.py) even if you don't have template.
 
 Later on, we will make use of app.py(uncomment ones)+prediction.py+POSTMAN(if you don't have template).
+<!-- POSTMAN -> Local Deployment -->
 
 13. lets create workflow using github:
 -> mkdir -p .github/workflows
 -> touch .github/workflows/ci-cd.yaml
 add content to it.
- tox(only of python testing) ~ github actions(general version)
 
-Why Node.js?
- When you're working on a project that involves both Python and JavaScript (for example, a web application with a backend written in Python and a frontend written in JavaScript), you might need to set up Node.js alongside Python. This ensures that you have the right tools available for both languages.
+ <!-- tox(only for python testing) ~ github actions(general version)
+    (a) dvc repro: in working env, run src codes corresponding to changes in params.yaml using dvc.yaml where we have defined all 3 stages and also save model, then execute step 12 to transfer model for usage in app.py
+    (b) tox: use tox.ini(create test env, install deps, run flake pytest) to test assertions in    test_config.py -> ONLY FOR TESTING, WORK WITH PYTHON SCRIPTS ONLY
+    (c) github actions: use tox.ini(on ubuntu, create python&NodeJS env & fetch latest code, install deps, run flake pytest heroku) -> FOR BOTH TESTING AND autoDEPLOYMENT, WORK WITH BOTH PYTHON+JS FILES -->
+ 
+<!-- Why Node.js?
+ When you're working on a project that involves both Python and JavaScript (for example, a web application with a backend written in Python and a frontend written in JavaScript), you might need to set up Node.js alongside Python. This ensures that you have the right tools available for both languages. -->
+
+ 14. Use Heroku(Heroku -> Global Deployment) for universal deployment.
+ So, create Proc file and content to it (its general content) which Heroku will use to start with for deployment.
+ uncomment/add Heroku part of (ci-cd.yaml) for (13.c), thus auto-deploy. But before that we need to connect git with heroku and also set secret keys.
+ 
 
 
 
