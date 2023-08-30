@@ -6,7 +6,9 @@ import numpy as np
 
 
 params_path = "params.yaml"
-schema_path = os.path.join("prediction_service", "schema_in.json")
+schema_path = os.path.join("prediction_service", "schema_in.json") #here max & min of input variables is written
+# we will copy from notebooks/schema_in.json to prediction_services/schema_in.json
+
 
 class NotInRange(Exception):
     def __init__(self, message="Values entered are not in expected range"):
@@ -86,7 +88,6 @@ def api_response(dict_request):
     except NotInCols as e:
         response = {"the_exected_cols": get_schema().keys(), "response": str(e) }
         return response
-
 
     except Exception as e:
         response = {"response": str(e) }

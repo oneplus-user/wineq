@@ -118,33 +118,34 @@ b. U can go to commits in git and if you want to go back:
         -> pip install pytest
         -> pip install tox
 
-    create tox.ini file in root directory
-        -> touch tox.ini
-    then add content to tox.ini where we create test env and command to run in it using pytest and flake8 tool.
-
-    <!-- 
-    [Without TOX, only PYTEST]
-    Hence, Right now, we can run:
-    ->pytest -v in terminal but we will get that "No test run". -->
-
-    So, we make folder of tests and put test files to it:
-        -> mkdir test
-        -> touch tests/__init__.py tests/conftest.py tests/test_config.py
-        add content to tests/conftest.py, tests/test_config
-        In tests/test_config: we add our assertion which we want to test.
     
-    <!-- 
-    ->pytest -v to run assertions mentioned in test_config.py but in existing env only -->
+    [Without TOX, usage of PYTEST]
+        Hence, Right now, we can run:
+        ->pytest -v in terminal but we will get that "No test run".
 
-    [With TOX, also use PYTEST]
-    -> tox
-    It will first create temporary env .tox : which is fresh env with latest requirements and run assertions mentioned in test_config.py
-    NOTE: with skipdist = False(default) in tox file, Tox will create a package like numpy for my code in temporary env before running assertions mentioned in test_config.py. This package in temporary env is built using setup.py.
+        So, we make folder of tests and put test files to it:
+            -> mkdir test
+            -> touch tests/__init__.py tests/conftest.py tests/test_config.py
+            add content to tests/conftest.py, tests/test_config
+            In tests/test_config: we add our assertion which we want to test.
+        
+        ->pytest -v to run assertions mentioned in test_config.py but in existing env only
 
-    so, let's create setup.py file.
-    -> touch setup.py and add content to it.
 
-    **********************************************************************************************
+    [With TOX, usage of PYTEST]
+    create tox.ini file in root directory
+    -> touch tox.ini
+    then add content to tox.ini where we create test env and command to run in it using pytest and flake8 tool.
+    
+       (a) -> tox (skipdist = True in tox.ini)
+            It will first create temporary env .tox : which is fresh env with latest requirements and run assertions mentioned in test_config.py
+            NOTE: with skipdist = False(default) in tox file, Tox will create a package like numpy for my code in temporary env before running assertions mentioned in test_config.py. This package in temporary env is built using setup.py.
+
+       (b) so, let's create setup.py file.
+            -> touch setup.py and add content to it.
+            -> tox (skipdist = False in tox.ini)
+
+    <!-- **********************************************************************************************
     *********** All action of setup.py in my working env, not temp env created by tox ************
     **********************************************************************************************
     Lets look at the folder structure given below:
@@ -164,11 +165,11 @@ b. U can go to commits in git and if you want to go back:
     ->pip freeze
     U can also import src in python from any pwd, even if package name is wine_src but source code folder name is src because it has been added in this env as package
 
-    <!-- [AFTER DEVELOPMENT]
+    [AFTER DEVELOPMENT]
     You would typically run:
     ->python setup.py sdist bdist_wheel
-    to create dist folder where zip file of package will be there and can then be shared and installed using tools like pip -->
-    *********************************************************************************************
+    to create dist folder where zip file of package will be there and can then be shared and installed using tools like pip
+    ********************************************************************************************* -->
 
 10. Now, we want to fill test_config.py as per my project data EDA. If we are making predictions, ranges of Xs can't be anything. It will be defined and if its beyond limits, we need to raise error. and this is what we want to achieve here.
 
@@ -197,10 +198,16 @@ Also created NotInRange() custom error to raise error. Check in EDA.ipynb and te
 
 add content to: main.css, 404.html, base.html, index.html. It's very const stuff.
 
+12. local deployment: app.py + prediction.py + POSTMAN/templates
+13. global deployment: app.py + prediction.py + templates + Heroku
+
 12. lets add content to app.py and transfer model to prediction_service
 -> cp saved_models/model.joblib prediction_service/model
 and set 
 -> webapp_model_dir: prediction_service/model/model.joblib in params.yaml
+
+-> python app.py for local deployment URL
+& test deployment in local using POSTMAN or using template if you have any.
 
 Lets see first commented part of app.py(don't need prediction.py which complement it):
     "Form format" and "JSON format" refer to two different ways of structuring data when sending information over HTTP request:
@@ -220,9 +227,9 @@ Lets see first commented part of app.py(don't need prediction.py which complemen
     Hence, you can just use just (POSTMAN and app.py) even if you don't have template.
 
 Later on, we will make use of app.py(uncomment ones)+prediction.py+POSTMAN(if you don't have template).
-<!-- POSTMAN -> Local Deployment -->
+<!-- POSTMAN -> Local Deployment testing-->
 
-13. lets create workflow using github:
+13. lets create workflow for github actions + Global Deployment:
 -> mkdir -p .github/workflows
 -> touch .github/workflows/ci-cd.yaml
 add content to it.
@@ -235,14 +242,61 @@ add content to it.
 <!-- Why Node.js?
  When you're working on a project that involves both Python and JavaScript (for example, a web application with a backend written in Python and a frontend written in JavaScript), you might need to set up Node.js alongside Python. This ensures that you have the right tools available for both languages. -->
 
- 14. Use Heroku(Heroku -> Global Deployment) for universal deployment.
+ Use Heroku(Heroku -> Global Deployment) for universal deployment.
  So, create Proc file and content to it (its general content) which Heroku will use to start with for deployment.
- uncomment/add Heroku part of (ci-cd.yaml) for (13.c), thus auto-deploy. But before that we need to connect git with heroku and also set secret keys.
+ uncomment/add Heroku part of (ci-cd.yaml) for (13.c), thus auto-deploy. But before that we need to connect heroku with git and also add keys from Heroku to secrets in GitHub.
  
+ 14. 
+ ****************************************************************
+ *********************** SUMMARY TILL NOW ************************
+Till here we had:
+DVC Pipeline: load_data -> split_data -> train_and_evaluate
+then, we could have tox for testing&linting
+OR,   we could have github actions for testing&linting and then deployment to heroku.
+So you see, we need github actions so that for any model generated through DVC pipeline, first testing will be done and then only deployment will be processed, otw, if test fails, prior model will continue to serve.
 
+Overall: 
+[DVC pipeline -> transfer model&schema_in to prediction service -> tox(testing)& app.py+POSTMAN(local deployment testing) -> github actions(testing & global deploy using Heroku)]
 
+Now, 3 things are still left to update:
+ (a) test_config.py for testing
+ (b) app.py has all the functions for predict and raise error. we will keep app.py clean and transfer all the functions to predict and raise error to prediction.py
+ <!-- CI(cont integration) & CT(cont testing) & CD(cont deployment) are being done. -->
+ (c) We are still not doing model versioning, so will do using mlflow.
+ ****************************************************************
+ ****************************************************************
 
+ 15. 
+ Part 14(b)
+ copy schema_in.json created at notebooks folder to prediction service
+ -> cp notebooks/schema_in.json prediction_service
+add content to prediction.py.
 
+<!-- How we are handling errors in prediction.py?
+    ->  function: return True/ raise errors(e1, e2)
+    ->  class ei(Exception):               #Exception is the parent class and ei is sub-class of it
+        def __init__(self, message="message of ei"):    # constructor of subclass
+            self.message = message
+            super().__init__(self.message)         # return message if [except ei as e] is given
+
+    (1) try block: will execute code or raise error using (code or function itself). The moment error is raised, either in function or code, control is transferred to except block
+    (2) except ei: will be executed only if ei is raised in try block
+    (3) except ei as e: will be executed only if ei is raised in try block & can be used to print(e) from ei
+    (4) except: will be at last and will be run if None of mentioned errors(ei_s) are raised
+    (5) except Exception as e:  will be at last and will be run if None of mentioned errors(ei_s) are raised & can be used to print(e)
+
+    try:
+        if a/function:
+            do this
+    except e1 as e:
+        print(e)
+        print(1)
+    except e2 as e:
+        print(e)
+        print(2)
+    except Exception as e:
+        print(e)
+        print(3) -->
 
 
 

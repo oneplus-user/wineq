@@ -49,12 +49,3 @@ jobs:
       #     git remote add heroku https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git
       #     git push heroku HEAD:main -f
 
-      - name: Deploy to Netlify
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}  # Use the name of your Netlify secret
-        if: github.ref == 'refs/heads/main' && job.status == 'success'
-        run: |
-          npm install -g netlify-cli  # Install the Netlify CLI
-          netlify login
-          netlify deploy --prod  # Deploy the site
-
